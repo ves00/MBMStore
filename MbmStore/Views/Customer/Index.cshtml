@@ -1,0 +1,24 @@
+﻿@using MbmStore.Models;
+
+@{
+    ViewData["Title"] = "Customer";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Customer</title>
+</head>
+<body>
+    @foreach (Customer customer in ViewBag.Customers)
+    {
+        <div>
+            @customer.Firstname @customer.Lastname was born in @customer.birthdate.ToString("dd/MM/yyyy"), so he/she is @customer.age years old.<br />
+            @customer.Zip @customer.City<br />
+            @string.Join(", ", customer.phoneNumbers)<br /><br />
+        </div>
+    }
+</body>
+</html>

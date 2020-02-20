@@ -1,0 +1,70 @@
+﻿@using MbmStore.Models;
+
+@{
+    ViewData["Title"] = "Invoice";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style>
+        p, ul {
+            display: inline-block;
+            vertical-align: top;
+            list-style: none;
+        }
+
+        p {
+            width: 200px;
+        }
+
+        ul {
+            padding: 0;
+            width: 400px;
+        }
+
+        strong {
+            display: inline-block;
+            width: 200px;
+        }
+
+            strong:nth-child(2) {
+                width: 400px;
+            }
+    </style>
+</head>
+<body>
+    <h1>Invoices</h1>
+
+    <div>
+        <strong>Customer</strong>
+        <strong>Product</strong>
+        <strong>Price</strong>
+        @foreach (Invoice invoice in ViewBag.Invoices)
+        {
+            decimal price = 0M;
+            <div>
+                <p>@invoice.Customer.Firstname @invoice.Customer.Lastname </p>
+                <ul>
+                    @foreach (OrderItem order in invoice.OrderItems)
+                    {
+                        <li>@order.Product.Title (@order.Product.ToString().Substring(16))</li>
+                    }
+                    <li><strong>Total</strong></li>
+                </ul>
+                <ul>
+                    @foreach (OrderItem order in invoice.OrderItems)
+                    {
+                        <li>@order.Product.Price $</li>
+                        price = price + order.Product.Price;
+                    }
+                    <li><strong>@price $</strong></li>
+                </ul>
+            </div>
+        }
+    </div>
+</body>
+</html>
